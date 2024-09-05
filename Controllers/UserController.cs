@@ -1,9 +1,11 @@
 ﻿using Asp.Versioning;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using shopping_api.Models;
 using shopping_api.Provider;
 
-namespace shopping_api.Controllers {
+namespace shopping_api.Controllers
+{
     [ApiVersion(1)]
     [Route("api/v{v:apiVersion}/[controller]")]
     [ApiController]

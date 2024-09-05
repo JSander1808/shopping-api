@@ -19,14 +19,17 @@ namespace shopping_api.General {
         }
 
         public static void exe(String command, Action<MySqlDataReader> reader, Action<Exception> error) {
-            if(connection == null || connection.State != System.Data.ConnectionState.Open) {
+            if(connection == null) return;
+            if(connection.State != System.Data.ConnectionState.Open) {
                 connection.Open();
             }
             try {
                 MySqlCommand cmd = new MySqlCommand(command, connection);
                 MySqlDataReader mySqlDataReader = cmd.ExecuteReader();
                 reader(mySqlDataReader);
+                connection.Close();
             }catch(Exception e) {
+                connection.Close();
                 if(e != null && error != null) {
                     error(e);
                 } else {
